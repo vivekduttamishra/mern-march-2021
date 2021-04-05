@@ -1,0 +1,1 @@
+ let olocal= oparam*10;

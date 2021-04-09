@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Throw your Dice</h1>
+    <button onclick="handleDiceThrow(0)" >Throw1</button>
+    <button onclick="handleDiceThrow(1)" >Throw2</button>
+
+    <h2 id="dicevalue1">[   ]</h2>
+    <h2 id="dicevalue2">[   ]</h2>
+
+    <script src="callback-with-result.js"></script>
+
+    <script>
+
+        const dices=[
+                document.getElementById('dicevalue1'),
+                document.getElementById('dicevalue2')
+        ];
+        
+        function handleDiceThrow(index){
+            throwTheDice( value =>{
+                dices[index].innerHTML = "[ "+value+" ]";
+            });
+
+            dices[index].innerHTML='[...]';
+        }
+
+    </script>
+</body>
+</html>

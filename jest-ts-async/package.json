@@ -1,0 +1,19 @@
+{
+  "name": "testing-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -w",
+    "test": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^26.0.23",
+    "@types/node": "^15.12.1",
+    "jest": "^27.0.4",
+    "ts-jest": "^27.0.3"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "testing-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc -w",
+    "dev": "set NODE_ENV=DEV& concurrently -k -n tsc,server -c red,green  \"tsc -w\"  \"nodemon ./bin/app.js\" ",
+    "start": "set NODE_ENV=PRODUCTION& node ./bin/app.js",
+    "test": "jest --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cors": "^2.8.10",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.12",
+    "@types/jest": "^26.0.23",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^15.12.1",
+    "jest": "^27.0.4",
+    "ts-jest": "^27.0.3"
+  },
+  "dependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/connect-busboy": "^0.0.2",
+    "@types/jsonwebtoken": "^8.5.1",
+    "bcrypt": "^5.0.1",
+    "connect-busboy": "^0.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.13"
+  }
+}

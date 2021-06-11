@@ -1,5 +1,6 @@
-export default class Exception{
-    constructor( public message:String, public status:number=400,public error:any=null){
+export default class Exception extends Error{
+    constructor( public message:string, public status:number=400,public error:any=null){
+        super(message);
         if(!this.error)
             this.error={}
         if(!this.error.message)

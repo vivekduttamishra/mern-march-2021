@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-
 describe("user-model tests",()=>{
 
 

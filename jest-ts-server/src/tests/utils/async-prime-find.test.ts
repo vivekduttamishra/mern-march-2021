@@ -70,6 +70,8 @@ xdescribe('asyncrhonous findPrimes tests',()=>{
 
         it('should return 25 primes between 0 and 100',()=>{
 
+          //a test need not use done if it is returning a Promise back
+          //jest automatically waits for a promise
           return findPrimesPromise(0,100)
             .then((primes:number[])=>{
                 expect(primes.length).toBe(25);

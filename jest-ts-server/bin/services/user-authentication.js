@@ -109,7 +109,7 @@ const register = (user) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         user.password = yield bcrypt_1.default.hash(user.password, 10);
         console.log('user', user);
-        let result = yield User.create(new User(user));
+        let result = yield User.create(user);
         console.log('result', result);
         return _generateToken(result);
     }

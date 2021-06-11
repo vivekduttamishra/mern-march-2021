@@ -18,7 +18,7 @@ class MovieService {
     constructor(movieModel) {
         this.movieModel = movieModel;
         this.getAllMovies = () => __awaiter(this, void 0, void 0, function* () {
-            console.log('in movie service getAllMovies');
+            //console.log('in movie service getAllMovies');
             let movies = yield this.movieModel.find();
             return movies;
         });
@@ -27,6 +27,7 @@ class MovieService {
             return new model_1.Model(result, 201);
         });
         this.getMovieById = (params) => __awaiter(this, void 0, void 0, function* () {
+            console.log('get movie by id params', params);
             let id = params.id;
             let movie = yield this.movieModel.findById(id);
             if (movie)

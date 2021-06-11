@@ -2,12 +2,12 @@ import Exception from '../utils/exception';
 import {Model} from '../utils/model';
 
 export default class MovieService{
-
+ 
 
     constructor(private movieModel:any){  }
 
     getAllMovies=async ()=>{
-        console.log('in movie service getAllMovies');
+        //console.log('in movie service getAllMovies');
         let movies=await this.movieModel.find();
         return movies;
         
@@ -19,7 +19,7 @@ export default class MovieService{
     }
     
     getMovieById=async (params:any)=>{
-        
+        console.log('get movie by id params',params);
         let id=params.id;
         let movie=await this.movieModel.findById(id);
         if(movie)

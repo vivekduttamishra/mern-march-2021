@@ -13,34 +13,56 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const user_1 = __importDefault(require("../../models/user"));
+const mongoose_connection_1 = require("../../config/mongoose-connection");
 const mongoose_1 = __importDefault(require("mongoose"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 describe("user-model tests", () => {
     let connection = null;
+    let UserModel = null;
     beforeAll(() => __awaiter(void 0, void 0, void 0, function* () {
         console.log('process.env.NODE_ENV', process.env.NODE_ENV);
         //console.log('connecting to datbase');
-        //await configureDb();
+        yield mongoose_connection_1.configureDb();
+        UserModel = user_1.default();
         console.log('connected...');
         connection = mongoose_1.default.connection;
+    }));
+    beforeEach(() => __awaiter(void 0, void 0, void 0, function* () {
+        yield mongoose_1.default.connection.db.dropCollection("users");
+        yield UserModel.create(new UserModel({ name: "Vivek", email: "vivek@email.com", password: "pass" }));
+        yield UserModel.create(new UserModel({ name: "Admin", email: "admin@email.com", password: "pass" }));
     }));
     afterAll(() => __awaiter(void 0, void 0, void 0, function* () {
         //console.log('disconnecting database');
         yield mongoose_1.default.connection.close();
     }));
-    it('has 4 users in the database', () => __awaiter(void 0, void 0, void 0, function* () {
-        const UserModel = user_1.default();
+    it('has 2 users in the database', () => __awaiter(void 0, void 0, void 0, function* () {
         const users = yield UserModel.find();
-        expect(users.length).toBe(4);
+        expect(users.length).toBe(2);
         //await expect(UserModel.countDocuments()).toBe(4);
     }));
-    it('can create new user', () => {
+    it('can create new user', () => __awaiter(void 0, void 0, void 0, function* () {
         //console.log("testing create new user");
-    });
-    it('fails to create a new user with missing required fields', () => {
+        const name = "New Name";
+        const user = yield UserModel.create(new UserModel({ name: name, email: "new@email.com", password: "pass" }));
+        expect(user._id).not.toBeNull();
+        let dbUser = yield UserModel.findById(user._id);
+        expect(dbUser.name).toStrictEqual(name);
+    }));
+    it('fails to create a new user with missing required fields', () => __awaiter(void 0, void 0, void 0, function* () {
         // console.log("testing create new user failure");
-    });
+        const name = "New Name";
+        const user = new UserModel({ name: name, password: "pass" });
+        // try{
+        //     await UserModel.create(user);
+        // }catch(err){
+        //     console.log(err.message);
+        //     expect(err).not.toBeNull();
+        //     expect(err.message).toMatch(/Path `email` is required/);
+        // }
+        yield expect(UserModel.create(user)).rejects.toThrow(/Path `email` is required/);
+    }));
     it('returns user with valid email address', () => {
         // console.log("testing get valid user");
     });

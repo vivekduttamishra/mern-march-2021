@@ -19,6 +19,15 @@ export default (movieService:any)=>{
 
         
 
+    router
+        .route("/with-actor/:actor")
+        .get(async(request:any,response:any)=>{
+            
+            //write your logic here
+            //no controller or service avialable.
+            //this is an untestable block of code
+
+        });
 
     return router;
 

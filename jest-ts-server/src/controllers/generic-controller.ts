@@ -15,8 +15,12 @@ export const handleRequest =  (service:Function) =>{
         
                 //do your business logic
                 let result=null;
-                if(req.message=="GET" || req.method=="DELETE")
+                console.log("req.method",req.method);
+
+                if(req.method=="GET" || req.method=="DELETE"){
+                    console.log('params passed to GET request ',params);                    
                     result=await service(params,body,{req,res,next});
+                }
                 else
                     result=await service(body,params,{req,res,next});
                     

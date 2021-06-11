@@ -114,6 +114,7 @@ export const _authenticate = async (request: any, response: any, next: any) => {
 
 export const register = async (user: any) => {
 
+    
     validateRequiredField(user, "name", "password", "email");
 
     const User = getUserModel();
@@ -122,7 +123,7 @@ export const register = async (user: any) => {
         
         user.password = await bcrypt.hash(user.password, 10);        
         console.log('user',user);
-        let result = await User.create(new User(user));
+        let result = await User.create(user);
         console.log('result',result);
         
         return _generateToken(result);

@@ -22,8 +22,11 @@ const handleRequest = (service) => {
             let params = req.params;
             //do your business logic
             let result = null;
-            if (req.message == "GET" || req.method == "DELETE")
+            console.log("req.method", req.method);
+            if (req.method == "GET" || req.method == "DELETE") {
+                console.log('params passed to GET request ', params);
                 result = yield service(params, body, { req, res, next });
+            }
             else
                 result = yield service(body, params, { req, res, next });
             if (result instanceof model_1.Model) {
